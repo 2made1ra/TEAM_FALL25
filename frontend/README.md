@@ -1,73 +1,76 @@
-# React + TypeScript + Vite
+# Workout Scheduling App - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Telegram Mini App для планирования и создания групповых тренировок.
 
-Currently, two official plugins are available:
+## 🚀 Быстрый старт
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+# Установка зависимостей
+npm install
 
-## React Compiler
+# Запуск dev сервера
+npm run dev
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Сборка для production
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🏗️ Архитектура проекта
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Технологический стек
+- **React 19** - UI библиотека
+- **TypeScript** - типизация
+- **Vite** - сборщик и dev сервер
+- **Tailwind CSS v4** - стилизация
+- **Radix UI** - доступные UI компоненты
+- **Lucide React** - иконки
+- **Sonner** - уведомления
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Структура приложения
+
 ```
+src/
+├── components/
+│   ├── BottomNavigation.tsx      # Нижняя навигация
+│   ├── ScheduleScreen.tsx        # Экран всех тренировок
+│   ├── MyScheduleScreen.tsx      # Мое расписание
+│   ├── CreateEventScreen.tsx     # Создание тренировки
+│   ├── ProfileScreen.tsx         # Профиль пользователя
+│   ├── PaymentScreen.tsx         # Экран оплаты
+│   ├── NotificationsScreen.tsx   # Уведомления
+│   └── ui/                       # Переиспользуемые UI компоненты
+│       ├── button.tsx
+│       ├── card.tsx
+│       ├── badge.tsx
+│       ├── input.tsx
+│       └── ...
+├── styles/
+│   └── globals.css               # Глобальные стили и Tailwind
+├── App.tsx                       # Главный компонент с роутингом
+└── main.tsx                      # Точка входа
+
+```
+
+### Основные экраны
+
+1. **Все тренировки** (`ScheduleScreen`) - просмотр и запись на тренировки
+2. **Мое расписание** (`MyScheduleScreen`) - управление записями и созданными тренировками
+3. **Создать тренировку** (`CreateEventScreen`) - форма создания новой тренировки
+4. **Профиль** (`ProfileScreen`) - информация и статистика пользователя
+5. **Оплата** (`PaymentScreen`) - процесс оплаты тренировки
+
+### Управление состоянием
+
+Используется локальное состояние React (`useState`) в главном компоненте `App.tsx`:
+- `events` - список тренировок
+- `joinedEventIds` - ID записанных тренировок
+- `createdEventIds` - ID созданных тренировок
+- `userProfile` - данные профиля пользователя
+- `notifications` - список уведомлений
+
+### Дизайн система
+
+- **Glass-morphism** эффекты для карточек
+- **Градиентные** фоны и элементы
+- **Адаптивная** верстка для мобильных устройств
+- **Темная/светлая** тема (через CSS переменные)
